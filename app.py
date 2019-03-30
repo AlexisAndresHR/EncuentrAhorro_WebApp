@@ -6,7 +6,7 @@ import config
 
 
 #activate ssl certificate
-ssl = False
+ssl = True
 
 urls = (
     '/', 'application.controllers.main.index.Index',
