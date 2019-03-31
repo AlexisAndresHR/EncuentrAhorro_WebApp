@@ -14,14 +14,14 @@ class Api_comentarios:
                     tmp = dict(row)
                     comentarios_json.append(tmp)
                 web.header('Content-Type', 'application/json')
-                return json.dumps(comentarios_json)
+                return json.dumps(comentarios_json, sort_keys=True, default=str)
             else:
                 # http://0.0.0.0:8080/api_comentarios?user_hash=12345&action=get&id_comentario=1
                 result = config.model.get_comentarios(int(id_comentario))
                 comentarios_json = []
                 comentarios_json.append(dict(result))
                 web.header('Content-Type', 'application/json')
-                return json.dumps(comentarios_json)
+                return json.dumps(comentarios_json, sort_keys=True, default=str)
         except Exception as e:
             print "GET Error {}".format(e.args)
             comentarios_json = '[]'

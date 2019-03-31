@@ -14,14 +14,14 @@ class Api_recomendaciones:
                     tmp = dict(row)
                     recomendaciones_json.append(tmp)
                 web.header('Content-Type', 'application/json')
-                return json.dumps(recomendaciones_json)
+                return json.dumps(recomendaciones_json, sort_keys=True, default=str)
             else:
                 # http://0.0.0.0:8080/api_recomendaciones?user_hash=12345&action=get&id_recomendacion=1
                 result = config.model.get_recomendaciones(int(id_recomendacion))
                 recomendaciones_json = []
                 recomendaciones_json.append(dict(result))
                 web.header('Content-Type', 'application/json')
-                return json.dumps(recomendaciones_json)
+                return json.dumps(recomendaciones_json, sort_keys=True, default=str)
         except Exception as e:
             print "GET Error {}".format(e.args)
             recomendaciones_json = '[]'
