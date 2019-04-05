@@ -1,9 +1,3 @@
-body{
-    background: -webkit-linear-gradient(left,black, rgba(0, 0, 0, 0.815)); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(right, black , rgba(0, 0, 0, 0.815)); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(right, black , rgba(0, 0, 0, 0.815)); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to right, black  , rgba(0, 0, 0, 0.815)); /* Standard syntax */
-}
 .slider{
     display: flex;
     box-sizing: border-box;
