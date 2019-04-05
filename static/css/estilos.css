@@ -1,0 +1,46 @@
+.slider{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.box{
+    flex: 1;
+    overflow: hidden;
+    margin: 8px;
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.20);
+    line-height: 0;
+    transition: all 600ms;
+}
+
+.box > img{
+    width: 200%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 300ms;
+}
+
+.box:hover{
+    flex: 50%;
+}
+
+.box:hover > img{
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
