@@ -1,14 +1,18 @@
+body{
+    background: -webkit-linear-gradient(left,black, rgba(0, 0, 0, 0.815)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, black , rgba(0, 0, 0, 0.815)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, black , rgba(0, 0, 0, 0.815)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, black  , rgba(0, 0, 0, 0.815)); /* Standard syntax */
+}
 .slider{
     display: flex;
-    width: 100%;
-    height: 100%;
     box-sizing: border-box;
 }
 
 .box{
     flex: 1;
     overflow: hidden;
-    margin: 8px;
+    margin: 2px;
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.20);
     line-height: 0;
     transition: all 600ms;
