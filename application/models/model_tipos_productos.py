@@ -13,9 +13,19 @@ def get_all_tipos_productos():
         return None
 
 
+
 def get_tipos_productos(id_producto):
     try:
         return db.select('tipos_productos', where='id_producto=$id_producto', vars=locals())[0]
+    except Exception as e:
+        print "Model get Error {}".format(e.args)
+        print "Model get Message {}".format(e.message)
+        return None
+
+
+def get_producto(nombre_producto):
+    try:
+        return db.select('tipos_productos', where='nombre_producto=$nombre_producto', vars=locals())[0]
     except Exception as e:
         print "Model get Error {}".format(e.args)
         print "Model get Message {}".format(e.message)
