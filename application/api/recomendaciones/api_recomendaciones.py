@@ -4,10 +4,10 @@ import json
 
 
 class Api_recomendaciones:
-    def get(self, id_recomendacion):
+    def get(self, id_recomendacion, id_producto):
         try:
             # http://0.0.0.0:8080/api_recomendaciones?user_hash=12345&action=get
-            if id_recomendacion is None:
+            if id_recomendacion is None and id_producto is None:
                 result = config.model.get_all_recomendaciones()
                 recomendaciones_json = []
                 for row in result:
@@ -15,18 +15,27 @@ class Api_recomendaciones:
                     recomendaciones_json.append(tmp)
                 web.header('Content-Type', 'application/json')
                 return json.dumps(recomendaciones_json, sort_keys=True, default=str)
-            else:
+            elif id_recomendacion is not None and id_producto is None:
                 # http://0.0.0.0:8080/api_recomendaciones?user_hash=12345&action=get&id_recomendacion=1
                 result = config.model.get_recomendaciones(int(id_recomendacion))
                 recomendaciones_json = []
                 recomendaciones_json.append(dict(result))
                 web.header('Content-Type', 'application/json')
                 return json.dumps(recomendaciones_json, sort_keys=True, default=str)
+            elif id_recomendacion is None and id_producto is not None:
+                # http://0.0.0.0:8080/api_recomendaciones?user_hash=12345&action=get&id_producto=1
+                result = config.model.get_recomendaciones_xproducto(int(id_producto))
+                recomendaciones_json = []
+                recomendaciones_json.append(dict(result))
+                web.header('Content-Type', 'application/json')
+                return json.dumps(recomendaciones_json, sort_keys=True, default=str)
+
         except Exception as e:
             print "GET Error {}".format(e.args)
             recomendaciones_json = '[]'
             web.header('Content-Type', 'application/json')
             return json.dumps(recomendaciones_json)
+
 
 # http://0.0.0.0:8080/api_recomendaciones?user_hash=12345&action=put&id_recomendacion=1&product=nuevo&description=nueva&stock=10&purchase_price=1&price_sale=3&product_image=0
     def put(self, fecha,descripcion,precio,latitud_ubi,longitud_ubi,duracion,id_categoria,id_producto,nombre_usuario,num_megusta,num_comentarios,promedio_evaluaciones,recomendacion_activa):
@@ -104,7 +113,7 @@ class Api_recomendaciones:
                 if action is None:
                     raise web.seeother('/404')
                 elif action == 'get':
-                    return self.get(id_recomendacion)
+                    return self.get(id_recomendacion, id_producto)
                 elif action == 'put':
                     return self.put(fecha,descripcion,precio,latitud_ubi,longitud_ubi,duracion,id_categoria,id_producto,nombre_usuario,num_megusta,num_comentarios,promedio_evaluaciones,recomendacion_activa)
                 elif action == 'delete':
