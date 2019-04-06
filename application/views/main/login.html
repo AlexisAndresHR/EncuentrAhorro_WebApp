@@ -1,27 +1,32 @@
 $def with(message)
 $var privilege: -1
-<div class='container'> 
+<div class='container'style="width: 60%;"> 
         <br>
         <br>
         <br>
-<h1>Login</h1>
+        <br>
+<h1 style="text-align: center">Inicio de Sesión</h1> <br>
 $if message != None:
-    <div class="alert alert-danger">
+    <div  class="alert alert-danger" role="alert">
 	<strong>Error:</strong> $message
     </div>
 
 <form action="" method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                <label>Username:</label>
+                <label>Nombre de Usuario:</label>
                 <input required id="username" type="text" class="form-control" name="username" size="30"/>
                 </div>
                 <div class="form-group">
-                        <label>Password:</label>
+                        <label>Contrase&ntilde;a:</label>
                         <input required id="password" type="password" class="form-control" name="password" size="30"/>
                 </div>
+                <br>
                 <div class="form-group">
                         <label></label>
-                        <button id="Login" name="Login" class="form-control"><span class="glyphicon glyphicon-log-in"></span> Login</button>
+                        <button id="Login" name="Login" class="form-control" 
+                        style="background:rgb(133, 5, 5); color:white;">
+                        <span><img src="/static/iconos/aceptar.png" width="20" height="20"></span> Aceptar
+                        </button>
                 </div>
 </form>
 </div>
