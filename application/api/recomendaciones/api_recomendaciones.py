@@ -26,7 +26,9 @@ class Api_recomendaciones:
                 # http://0.0.0.0:8080/api_recomendaciones?user_hash=12345&action=get&id_producto=1
                 result = config.model.get_recomendaciones_xproducto(int(id_producto))
                 recomendaciones_json = []
-                recomendaciones_json.append(dict(result))
+                for row in result:
+                    tmp = dict(row)
+                    recomendaciones_json.append(tmp)
                 web.header('Content-Type', 'application/json')
                 return json.dumps(recomendaciones_json, sort_keys=True, default=str)
 

@@ -23,7 +23,7 @@ def get_recomendaciones(id_recomendacion):
 
 def get_recomendaciones_xproducto(id_producto):
     try:
-        return db.select('recomendaciones', where='id_producto=$id_producto', vars=locals())[0]
+        return db.select('recomendaciones', where='id_producto=$id_producto', vars=locals())
     except Exception as e:
         print "Model get Error {}".format(e.args)
         print "Model get Message {}".format(e.message)
