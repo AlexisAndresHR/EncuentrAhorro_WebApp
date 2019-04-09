@@ -21,6 +21,14 @@ def get_comentarios(id_comentario):
         print "Model get Message {}".format(e.message)
         return None
 
+def get_comentario_rec(id_recomendacion):
+    try:
+        return db.select('comentarios', where='id_recomendacion=$id_recomendacion', vars=locals())
+    except Exception as e:
+        print "Model get Error {}".format(e.args)
+        print "Model get Message {}".format(e.message)
+        return None
+
 
 def delete_comentarios(id_comentario):
     try:

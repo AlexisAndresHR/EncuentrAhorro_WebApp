@@ -4,10 +4,10 @@ import json
 
 
 class Api_comentarios:
-    def get(self, id_comentario):
+    def get(self, id_comentario, id_recomendacion):
         try:
             # http://0.0.0.0:8080/api_comentarios?user_hash=12345&action=get
-            if id_comentario is None:
+            if id_comentario is None and id_recomendacion is None:
                 result = config.model.get_all_comentarios()
                 comentarios_json = []
                 for row in result:
@@ -15,11 +15,20 @@ class Api_comentarios:
                     comentarios_json.append(tmp)
                 web.header('Content-Type', 'application/json')
                 return json.dumps(comentarios_json, sort_keys=True, default=str)
-            else:
+            elif id_comentario is not None and id_recomendacion is None:
                 # http://0.0.0.0:8080/api_comentarios?user_hash=12345&action=get&id_comentario=1
                 result = config.model.get_comentarios(int(id_comentario))
                 comentarios_json = []
                 comentarios_json.append(dict(result))
+                web.header('Content-Type', 'application/json')
+                return json.dumps(comentarios_json, sort_keys=True, default=str)
+            # http://0.0.0.0:8080/api_comentarios?user_hash=12345&action=get&id_recomendacion=1
+            elif id_comentario is None and id_recomendacion is not None:
+                result = config.model.get_comentario_rec(int(id_recomendacion))
+                comentarios_json = []
+                for row in result:
+                    tmp = dict(row)
+                    comentarios_json.append(tmp)
                 web.header('Content-Type', 'application/json')
                 return json.dumps(comentarios_json, sort_keys=True, default=str)
         except Exception as e:
@@ -27,6 +36,7 @@ class Api_comentarios:
             comentarios_json = '[]'
             web.header('Content-Type', 'application/json')
             return json.dumps(comentarios_json)
+
 
 # http://0.0.0.0:8080/api_comentarios?user_hash=12345&action=put&id_comentario=1&product=nuevo&description=nueva&stock=10&purchase_price=1&price_sale=3&product_image=0
     def put(self, id_recomendacion,nombre_usuario,contenido,fecha_comentario):
@@ -86,7 +96,7 @@ class Api_comentarios:
                 if action is None:
                     raise web.seeother('/404')
                 elif action == 'get':
-                    return self.get(id_comentario)
+                    return self.get(id_comentario, id_recomendacion)
                 elif action == 'put':
                     return self.put(id_recomendacion,nombre_usuario,contenido,fecha_comentario)
                 elif action == 'delete':
