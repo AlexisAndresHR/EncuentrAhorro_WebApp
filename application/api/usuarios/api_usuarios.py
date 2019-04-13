@@ -28,10 +28,10 @@ class Api_usuarios:
             web.header('Content-Type', 'application/json')
             return json.dumps(usuarios_json)
 
-# http://0.0.0.0:8080/api_usuarios?user_hash=12345&action=put&nombre_usuario=1&product=nuevo&description=nueva&stock=10&purchase_price=1&price_sale=3&product_image=0
-    def put(self, email_usuario,contrasena_usuario,nombre,apellido_pat,apellido_mat,fotografia_usuario,promedio_evaluaciones,nivel_usuario,codigo_recuperacion):
+# http://0.0.0.0:8080/api_usuarios?user_hash=12345&action=put&nombre_usuario=Usuario01&...
+    def put(self, nombre_usuario,email_usuario,contrasena_usuario,nombre,apellido_pat,apellido_mat,fotografia_usuario,promedio_evaluaciones,nivel_usuario,codigo_recuperacion):
         try:
-            config.model.insert_usuarios(email_usuario,contrasena_usuario,nombre,apellido_pat,apellido_mat,fotografia_usuario,promedio_evaluaciones,nivel_usuario,codigo_recuperacion)
+            config.model.insert_usuarios(nombre_usuario,email_usuario,contrasena_usuario,nombre,apellido_pat,apellido_mat,fotografia_usuario,promedio_evaluaciones,nivel_usuario,codigo_recuperacion)
             usuarios_json = '[{200}]'
             web.header('Content-Type', 'application/json')
             return json.dumps(usuarios_json)
@@ -98,7 +98,7 @@ class Api_usuarios:
                 elif action == 'get':
                     return self.get(nombre_usuario)
                 elif action == 'put':
-                    return self.put(email_usuario,contrasena_usuario,nombre,apellido_pat,apellido_mat,fotografia_usuario,promedio_evaluaciones,nivel_usuario,codigo_recuperacion)
+                    return self.put(nombre_usuario,email_usuario,contrasena_usuario,nombre,apellido_pat,apellido_mat,fotografia_usuario,promedio_evaluaciones,nivel_usuario,codigo_recuperacion)
                 elif action == 'delete':
                     return self.delete(nombre_usuario)
                 elif action == 'update':

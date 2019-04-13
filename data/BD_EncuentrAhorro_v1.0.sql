@@ -40,13 +40,13 @@ SELECT * FROM sessions;
 CREATE TABLE IF NOT EXISTS usuarios (
     nombre_usuario varchar(20) primary key,
     email_usuario varchar(50) not null,
-    contrasena_usuario varchar(20) not null,
     nombre varchar(30) not null,
     apellido_pat varchar(30) not null,
-    apellido_mat varchar(30) not null,
-    fotografia_usuario blob,
     promedio_evaluaciones float not null default 0,
     nivel_usuario varchar(20) not null default "Promedio",
+    contrasena_usuario varchar(20) null,
+    apellido_mat varchar(30) null,
+    fotografia_usuario blob null,
     codigo_recuperacion varchar(20) null
 );
 DESCRIBE usuarios;
