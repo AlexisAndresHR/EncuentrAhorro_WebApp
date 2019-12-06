@@ -31,10 +31,10 @@ def delete_evaluaciones(id_evaluacion):
         return None
 
 
-def insert_evaluaciones(calificacion,id_recomendacion,nombre_usuario):
+def insert_evaluaciones(calificacion,id_tienda,nombre_usuario):
     try:
         return db.insert('evaluaciones',calificacion=calificacion,
-id_recomendacion=id_recomendacion,
+id_tienda=id_tienda,
 nombre_usuario=nombre_usuario)
     except Exception as e:
         print "Model insert Error {}".format(e.args)
@@ -42,11 +42,11 @@ nombre_usuario=nombre_usuario)
         return None
 
 
-def edit_evaluaciones(id_evaluacion,calificacion,id_recomendacion,nombre_usuario):
+def edit_evaluaciones(id_evaluacion,calificacion,id_tienda,nombre_usuario):
     try:
         return db.update('evaluaciones',id_evaluacion=id_evaluacion,
 calificacion=calificacion,
-id_recomendacion=id_recomendacion,
+id_tienda=id_tienda,
 nombre_usuario=nombre_usuario,
                   where='id_evaluacion=$id_evaluacion',
                   vars=locals())

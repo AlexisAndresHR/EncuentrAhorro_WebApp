@@ -50,7 +50,7 @@ class Edit:
         form['id_recomendacion'] = config.check_secure_val(str(form['id_recomendacion'])) # HMAC id_recomendacion validate
         # edit user with new data
         result = config.model.edit_recomendaciones(
-            form['id_recomendacion'],form['fecha'],form['descripcion'],form['precio'],form['latitud_ubi'],form['longitud_ubi'],form['duracion'],form['id_categoria'],form['id_producto'],form['nombre_usuario'],form['num_megusta'],form['num_comentarios'],form['promedio_evaluaciones'],form['recomendacion_activa'],
+            form['id_recomendacion'],form['fecha'],form['descripcion'],form['precio'],form['latitud_ubi'],form['longitud_ubi'],form['duracion'],form['id_categoria'],form['id_producto'],form['nombre_usuario'],form['id_tienda'],form['rec_confiable'],form['rec_falsa'],form['num_comentarios'],form['promedio_evaluaciones'],form['recomendacion_activa'],
         )
         if result == None: # Error on udpate data
             id_recomendacion = config.check_secure_val(str(id_recomendacion)) # validate HMAC id_recomendacion

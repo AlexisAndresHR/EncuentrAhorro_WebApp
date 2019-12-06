@@ -40,9 +40,9 @@ class Api_recomendaciones:
 
 
 # http://0.0.0.0:8080/api_recomendaciones?user_hash=12345&action=put&id_recomendacion=1&product=nuevo&description=nueva&stock=10&purchase_price=1&price_sale=3&product_image=0
-    def put(self, fecha,descripcion,precio,latitud_ubi,longitud_ubi,duracion,id_categoria,id_producto,nombre_usuario,num_megusta,num_comentarios,promedio_evaluaciones,recomendacion_activa):
+    def put(self, fecha,descripcion,precio,latitud_ubi,longitud_ubi,duracion,id_categoria,id_producto,nombre_usuario,id_tienda,rec_confiable,rec_falsa,num_comentarios,promedio_evaluaciones,recomendacion_activa):
         try:
-            config.model.insert_recomendaciones(fecha,descripcion,precio,latitud_ubi,longitud_ubi,duracion,id_categoria,id_producto,nombre_usuario,num_megusta,num_comentarios,promedio_evaluaciones,recomendacion_activa)
+            config.model.insert_recomendaciones(fecha,descripcion,precio,latitud_ubi,longitud_ubi,duracion,id_categoria,id_producto,nombre_usuario,id_tienda,rec_confiable,rec_falsa,num_comentarios,promedio_evaluaciones,recomendacion_activa)
             recomendaciones_json = '[{200}]'
             web.header('Content-Type', 'application/json')
             return json.dumps(recomendaciones_json)
@@ -62,9 +62,9 @@ class Api_recomendaciones:
             return None
 
 # http://0.0.0.0:8080/api_recomendaciones?user_hash=12345&action=update&id_recomendacion=1&product=nuevo&description=nueva&stock=10&purchase_price=1&price_sale=3&product_image=default.jpg
-    def update(self, id_recomendacion, fecha,descripcion,precio,latitud_ubi,longitud_ubi,duracion,id_categoria,id_producto,nombre_usuario,num_megusta,num_comentarios,promedio_evaluaciones,recomendacion_activa):
+    def update(self, id_recomendacion, fecha,descripcion,precio,latitud_ubi,longitud_ubi,duracion,id_categoria,id_producto,nombre_usuario,id_tienda,rec_confiable,rec_falsa,num_comentarios,promedio_evaluaciones,recomendacion_activa):
         try:
-            config.model.edit_recomendaciones(id_recomendacion,fecha,descripcion,precio,latitud_ubi,longitud_ubi,duracion,id_categoria,id_producto,nombre_usuario,num_megusta,num_comentarios,promedio_evaluaciones,recomendacion_activa)
+            config.model.edit_recomendaciones(id_recomendacion,fecha,descripcion,precio,latitud_ubi,longitud_ubi,duracion,id_categoria,id_producto,nombre_usuario,id_tienda,rec_confiable,rec_falsa,num_comentarios,promedio_evaluaciones,recomendacion_activa)
             recomendaciones_json = '[{200}]'
             web.header('Content-Type', 'application/json')
             return json.dumps(recomendaciones_json)
@@ -88,7 +88,9 @@ class Api_recomendaciones:
             id_categoria=None,
             id_producto=None,
             nombre_usuario=None,
-            num_megusta=None,
+            id_tienda=None,
+            rec_confiable=None,
+            rec_falsa=None,
             num_comentarios=None,
             promedio_evaluaciones=None,
             recomendacion_activa=None,
@@ -106,7 +108,9 @@ class Api_recomendaciones:
             id_categoria=user_data.id_categoria
             id_producto=user_data.id_producto
             nombre_usuario=user_data.nombre_usuario
-            num_megusta=user_data.num_megusta
+            id_tienda=user_data.num_megusta
+            rec_confiable=user_data.num_megusta
+            rec_falsa=user_data.num_megusta
             num_comentarios=user_data.num_comentarios
             promedio_evaluaciones=user_data.promedio_evaluaciones
             recomendacion_activa=user_data.recomendacion_activa
@@ -117,11 +121,11 @@ class Api_recomendaciones:
                 elif action == 'get':
                     return self.get(id_recomendacion, id_producto)
                 elif action == 'put':
-                    return self.put(fecha,descripcion,precio,latitud_ubi,longitud_ubi,duracion,id_categoria,id_producto,nombre_usuario,num_megusta,num_comentarios,promedio_evaluaciones,recomendacion_activa)
+                    return self.put(fecha,descripcion,precio,latitud_ubi,longitud_ubi,duracion,id_categoria,id_producto,nombre_usuario,id_tienda,rec_confiable,rec_falsa,num_comentarios,promedio_evaluaciones,recomendacion_activa)
                 elif action == 'delete':
                     return self.delete(id_recomendacion)
                 elif action == 'update':
-                    return self.update(id_recomendacion, fecha,descripcion,precio,latitud_ubi,longitud_ubi,duracion,id_categoria,id_producto,nombre_usuario,num_megusta,num_comentarios,promedio_evaluaciones,recomendacion_activa)
+                    return self.update(id_recomendacion, fecha,descripcion,precio,latitud_ubi,longitud_ubi,duracion,id_categoria,id_producto,nombre_usuario,id_tienda,rec_confiable,rec_falsa,num_comentarios,promedio_evaluaciones,recomendacion_activa)
             else:
                 raise web.seeother('/404')
         except Exception as e:

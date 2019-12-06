@@ -45,6 +45,6 @@ class Insert:
 
         # call model insert_recomendaciones and try to insert new data
         config.model.insert_recomendaciones(
-            form['fecha'],form['descripcion'],form['precio'],form['latitud_ubi'],form['longitud_ubi'],form['duracion'],form['id_categoria'],form['id_producto'],form['nombre_usuario'],form['num_megusta'],form['num_comentarios'],form['promedio_evaluaciones'],form['recomendacion_activa'],
+            form['fecha'],form['descripcion'],form['precio'],form['latitud_ubi'],form['longitud_ubi'],form['duracion'],form['id_categoria'],form['id_producto'],form['nombre_usuario'],form['id_tienda'],form['rec_confiable'],form['rec_falsa'],form['num_comentarios'],form['promedio_evaluaciones'],form['recomendacion_activa'],
         )
         raise config.web.seeother('/recomendaciones') # render recomendaciones index.html

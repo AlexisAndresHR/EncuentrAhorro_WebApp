@@ -39,7 +39,7 @@ def delete_recomendaciones(id_recomendacion):
         return None
 
 
-def insert_recomendaciones(fecha,descripcion,precio,latitud_ubi,longitud_ubi,duracion,id_categoria,id_producto,nombre_usuario,num_megusta,num_comentarios,promedio_evaluaciones,recomendacion_activa):
+def insert_recomendaciones(fecha,descripcion,precio,latitud_ubi,longitud_ubi,duracion,id_categoria,id_producto,nombre_usuario,id_tienda,rec_confiable,rec_falsa,num_comentarios,promedio_evaluaciones,recomendacion_activa):
     try:
         return db.insert('recomendaciones',fecha=fecha,
 descripcion=descripcion,
@@ -50,7 +50,9 @@ duracion=duracion,
 id_categoria=id_categoria,
 id_producto=id_producto,
 nombre_usuario=nombre_usuario,
-num_megusta=num_megusta,
+id_tienda=id_tienda,
+rec_confiable=rec_confiable,
+rec_falsa=rec_falsa,
 num_comentarios=num_comentarios,
 promedio_evaluaciones=promedio_evaluaciones,
 recomendacion_activa=recomendacion_activa)
@@ -60,7 +62,7 @@ recomendacion_activa=recomendacion_activa)
         return None
 
 
-def edit_recomendaciones(id_recomendacion,fecha,descripcion,precio,latitud_ubi,longitud_ubi,duracion,id_categoria,id_producto,nombre_usuario,num_megusta,num_comentarios,promedio_evaluaciones,recomendacion_activa):
+def edit_recomendaciones(id_recomendacion,fecha,descripcion,precio,latitud_ubi,longitud_ubi,duracion,id_categoria,id_producto,nombre_usuario,id_tienda,rec_confiable,rec_falsa,num_comentarios,promedio_evaluaciones,recomendacion_activa):
     try:
         return db.update('recomendaciones',id_recomendacion=id_recomendacion,
 fecha=fecha,
@@ -72,7 +74,9 @@ duracion=duracion,
 id_categoria=id_categoria,
 id_producto=id_producto,
 nombre_usuario=nombre_usuario,
-num_megusta=num_megusta,
+id_tienda=id_tienda,
+rec_confiable=rec_confiable,
+rec_falsa=rec_falsa,
 num_comentarios=num_comentarios,
 promedio_evaluaciones=promedio_evaluaciones,
 recomendacion_activa=recomendacion_activa,

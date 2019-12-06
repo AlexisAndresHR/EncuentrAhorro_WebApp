@@ -29,9 +29,9 @@ class Api_evaluaciones:
             return json.dumps(evaluaciones_json)
 
 # http://0.0.0.0:8080/api_evaluaciones?user_hash=12345&action=put&id_evaluacion=1&product=nuevo&description=nueva&stock=10&purchase_price=1&price_sale=3&product_image=0
-    def put(self, calificacion,id_recomendacion,nombre_usuario):
+    def put(self, calificacion,id_tienda,nombre_usuario):
         try:
-            config.model.insert_evaluaciones(calificacion,id_recomendacion,nombre_usuario)
+            config.model.insert_evaluaciones(calificacion,id_tienda,nombre_usuario)
             evaluaciones_json = '[{200}]'
             web.header('Content-Type', 'application/json')
             return json.dumps(evaluaciones_json)
@@ -51,9 +51,9 @@ class Api_evaluaciones:
             return None
 
 # http://0.0.0.0:8080/api_evaluaciones?user_hash=12345&action=update&id_evaluacion=1&product=nuevo&description=nueva&stock=10&purchase_price=1&price_sale=3&product_image=default.jpg
-    def update(self, id_evaluacion, calificacion,id_recomendacion,nombre_usuario):
+    def update(self, id_evaluacion, calificacion,id_tienda,nombre_usuario):
         try:
-            config.model.edit_evaluaciones(id_evaluacion,calificacion,id_recomendacion,nombre_usuario)
+            config.model.edit_evaluaciones(id_evaluacion,calificacion,id_tienda,nombre_usuario)
             evaluaciones_json = '[{200}]'
             web.header('Content-Type', 'application/json')
             return json.dumps(evaluaciones_json)
@@ -69,7 +69,7 @@ class Api_evaluaciones:
             action=None,
             id_evaluacion=None,
             calificacion=None,
-            id_recomendacion=None,
+            id_tienda=None,
             nombre_usuario=None,
         )
         try:
@@ -77,7 +77,7 @@ class Api_evaluaciones:
             action = user_data.action  # action GET, PUT, DELETE, UPDATE
             id_evaluacion=user_data.id_evaluacion
             calificacion=user_data.calificacion
-            id_recomendacion=user_data.id_recomendacion
+            id_tienda=user_data.id_tienda
             nombre_usuario=user_data.nombre_usuario
             # user_hash
             if user_hash == 'dc243fdf1a24cbced74db81708b30788':
@@ -86,11 +86,11 @@ class Api_evaluaciones:
                 elif action == 'get':
                     return self.get(id_evaluacion)
                 elif action == 'put':
-                    return self.put(calificacion,id_recomendacion,nombre_usuario)
+                    return self.put(calificacion,id_tienda,nombre_usuario)
                 elif action == 'delete':
                     return self.delete(id_evaluacion)
                 elif action == 'update':
-                    return self.update(id_evaluacion, calificacion,id_recomendacion,nombre_usuario)
+                    return self.update(id_evaluacion, calificacion,id_tienda,nombre_usuario)
             else:
                 raise web.seeother('/404')
         except Exception as e:

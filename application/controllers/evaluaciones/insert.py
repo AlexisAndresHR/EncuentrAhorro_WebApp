@@ -45,6 +45,6 @@ class Insert:
 
         # call model insert_evaluaciones and try to insert new data
         config.model.insert_evaluaciones(
-            form['calificacion'],form['id_recomendacion'],form['nombre_usuario'],
+            form['calificacion'],form['id_tienda'],form['nombre_usuario'],
         )
         raise config.web.seeother('/evaluaciones') # render evaluaciones index.html
