@@ -1,0 +1,46 @@
+$def with(tiendas, message)
+<h3>
+    <a href="/tiendas">tiendas</a>
+</h3>
+$if message != None:
+    <div class="alert alert-warning">
+        <strong>Advertencia </strong> $message
+    </div>
+<br>
+
+<form action="" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id_tienda" id="id_tienda" value="$tiendas.id_tienda" />
+
+    <div class="form-group">
+        <label for="nombre_tienda">nombre_tienda</label>
+        <input readonly id="nombre_tienda" type="text" class="form-control" name="nombre_tienda" size="30" value="$tiendas.nombre_tienda"/>
+    </div>
+    <div class="form-group">
+        <label for="nom_acceso_tienda">nom_acceso_tienda</label>
+        <input readonly id="nom_acceso_tienda" type="text" class="form-control" name="nom_acceso_tienda" size="30" value="$tiendas.nom_acceso_tienda"/>
+    </div>
+    <div class="form-group">
+        <label for="contrasena_tienda">contrasena_tienda</label>
+        <input readonly id="contrasena_tienda" type="text" class="form-control" name="contrasena_tienda" size="30" value="$tiendas.contrasena_tienda"/>
+    </div>
+    <div class="form-group">
+        <label for="fotografia_tienda">fotografia_tienda</label>
+        <input readonly id="fotografia_tienda" type="text" class="form-control" name="fotografia_tienda" size="30" value="$tiendas.fotografia_tienda"/>
+    </div>
+    <div class="form-group">
+        <label for="promedio_evaluaciones">promedio_evaluaciones</label>
+        <input readonly id="promedio_evaluaciones" type="text" class="form-control" name="promedio_evaluaciones" size="30" value="$tiendas.promedio_evaluaciones"/>
+    </div>
+
+    <div class="form-group">
+        <label></label>
+        <button id="Login" name="Login" class="form-control" 
+            style="background:rgb(133, 5, 5); color:white;">
+            <span><img src="/static/iconos/aceptar.png" width="20" height="20"></span> Aceptar
+        </button>
+    </div>
+    
+</form>
+<br>
+<br>
+<br>

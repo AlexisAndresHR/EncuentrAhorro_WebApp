@@ -6,7 +6,7 @@ import json
 class Api_recomendaciones:
     def get(self, id_recomendacion, id_producto):
         try:
-            # http://0.0.0.0:8080/api_recomendaciones?user_hash=12345&action=get
+            # http://0.0.0.0:8080/api_recomendaciones?user_hash=dc243fdf1a24cbced74db81708b30788&action=get
             if id_recomendacion is None and id_producto is None:
                 result = config.model.get_all_recomendaciones()
                 recomendaciones_json = []
@@ -108,9 +108,9 @@ class Api_recomendaciones:
             id_categoria=user_data.id_categoria
             id_producto=user_data.id_producto
             nombre_usuario=user_data.nombre_usuario
-            id_tienda=user_data.num_megusta
-            rec_confiable=user_data.num_megusta
-            rec_falsa=user_data.num_megusta
+            id_tienda=user_data.id_tienda
+            rec_confiable=user_data.rec_confiable
+            rec_falsa=user_data.rec_falsa
             num_comentarios=user_data.num_comentarios
             promedio_evaluaciones=user_data.promedio_evaluaciones
             recomendacion_activa=user_data.recomendacion_activa

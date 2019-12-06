@@ -1,0 +1,5 @@
+'/tiendas', 'application.controllers.tiendas.index.Index',
+'/tiendas/view/(.+)', 'application.controllers.tiendas.view.View',
+'/tiendas/edit/(.+)', 'application.controllers.tiendas.edit.Edit',
+'/tiendas/delete/(.+)', 'application.controllers.tiendas.delete.Delete',
+'/tiendas/insert', 'application.controllers.tiendas.insert.Insert',
