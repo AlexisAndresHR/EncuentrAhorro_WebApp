@@ -29,6 +29,15 @@ def get_recomendaciones_xproducto(id_producto):
         print "Model get Message {}".format(e.message)
         return None
 
+def get_recomendaciones_xtienda(id_tienda):
+    try:
+        return db.select('recomendaciones', where='id_tienda=$id_tienda', vars=locals())
+    except Exception as e:
+        print "Model get Error {}".format(e.args)
+        print "Model get Message {}".format(e.message)
+        return None
+
+
 
 def delete_recomendaciones(id_recomendacion):
     try:

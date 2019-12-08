@@ -21,6 +21,15 @@ def get_tiendas(id_tienda):
         print "Model get Message {}".format(e.message)
         return None
 
+def get_infotienda_xnombre(nombre_tienda):
+    try:
+        return db.select('tiendas', where='nombre_tienda=$nombre_tienda', vars=locals())[0]
+    except Exception as e:
+        print "Model get Error {}".format(e.args)
+        print "Model get Message {}".format(e.message)
+        return None
+
+
 
 def delete_tiendas(id_tienda):
     try:

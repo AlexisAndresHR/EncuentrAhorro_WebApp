@@ -4,10 +4,10 @@ import json
 
 
 class Api_recomendaciones:
-    def get(self, id_recomendacion, id_producto):
+    def get(self, id_recomendacion, id_producto, id_tienda):
         try:
             # http://0.0.0.0:8080/api_recomendaciones?user_hash=dc243fdf1a24cbced74db81708b30788&action=get
-            if id_recomendacion is None and id_producto is None:
+            if id_recomendacion is None and id_producto is None and id_tienda is None:
                 result = config.model.get_all_recomendaciones()
                 recomendaciones_json = []
                 for row in result:
@@ -15,16 +15,25 @@ class Api_recomendaciones:
                     recomendaciones_json.append(tmp)
                 web.header('Content-Type', 'application/json')
                 return json.dumps(recomendaciones_json, sort_keys=True, default=str)
-            elif id_recomendacion is not None and id_producto is None:
-                # http://0.0.0.0:8080/api_recomendaciones?user_hash=12345&action=get&id_recomendacion=1
+            # http://0.0.0.0:8080/api_recomendaciones?user_hash=12345&action=get&id_recomendacion=1
+            elif id_recomendacion is not None and id_producto is None and id_tienda is None:
                 result = config.model.get_recomendaciones(int(id_recomendacion))
                 recomendaciones_json = []
                 recomendaciones_json.append(dict(result))
                 web.header('Content-Type', 'application/json')
                 return json.dumps(recomendaciones_json, sort_keys=True, default=str)
-            elif id_recomendacion is None and id_producto is not None:
-                # http://0.0.0.0:8080/api_recomendaciones?user_hash=12345&action=get&id_producto=1
+            # http://0.0.0.0:8080/api_recomendaciones?user_hash=12345&action=get&id_producto=1
+            elif id_recomendacion is None and id_producto is not None and id_tienda is None:
                 result = config.model.get_recomendaciones_xproducto(int(id_producto))
+                recomendaciones_json = []
+                for row in result:
+                    tmp = dict(row)
+                    recomendaciones_json.append(tmp)
+                web.header('Content-Type', 'application/json')
+                return json.dumps(recomendaciones_json, sort_keys=True, default=str)
+            # http://0.0.0.0:8080/api_recomendaciones?user_hash=dc243fd&action=get&id_tienda=1
+            elif id_recomendacion is None and id_producto is None and id_tienda is not None:
+                result = config.model.get_recomendaciones_xtienda(int(id_tienda))
                 recomendaciones_json = []
                 for row in result:
                     tmp = dict(row)
@@ -119,7 +128,7 @@ class Api_recomendaciones:
                 if action is None:
                     raise web.seeother('/404')
                 elif action == 'get':
-                    return self.get(id_recomendacion, id_producto)
+                    return self.get(id_recomendacion, id_producto, id_tienda)
                 elif action == 'put':
                     return self.put(fecha,descripcion,precio,latitud_ubi,longitud_ubi,duracion,id_categoria,id_producto,nombre_usuario,id_tienda,rec_confiable,rec_falsa,num_comentarios,promedio_evaluaciones,recomendacion_activa)
                 elif action == 'delete':

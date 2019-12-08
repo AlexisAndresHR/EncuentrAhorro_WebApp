@@ -4,10 +4,10 @@ import json
 
 
 class Api_tiendas:
-    def get(self, id_tienda):
+    def get(self, id_tienda, nombre_tienda):
         try:
             # http://0.0.0.0:8080/api_tiendas?user_hash=dc243fdf1a24cbced74db81708b30788&action=get
-            if id_tienda is None:
+            if id_tienda is None and nombre_tienda is None:
                 result = config.model.get_all_tiendas()
                 tiendas_json = []
                 for row in result:
@@ -15,18 +15,27 @@ class Api_tiendas:
                     tiendas_json.append(tmp)
                 web.header('Content-Type', 'application/json')
                 return json.dumps(tiendas_json)
-            else:
-                # http://0.0.0.0:8080/api_tiendas?user_hash=12345&action=get&id_tienda=1
+            # http://0.0.0.0:8080/api_tiendas?user_hash=12345&action=get&id_tienda=1
+            elif id_tienda is not None and nombre_tienda is None:
                 result = config.model.get_tiendas(int(id_tienda))
                 tiendas_json = []
                 tiendas_json.append(dict(result))
                 web.header('Content-Type', 'application/json')
                 return json.dumps(tiendas_json)
+            # http://0.0.0.0:8080/api_tiendas?user_hash=12345&action=get&nombre_tienda=SeA
+            elif id_tienda is None and nombre_tienda is not None:
+                result = config.model.get_infotienda_xnombre(str(nombre_tienda))
+                tiendas_json = []
+                tiendas_json.append(dict(result))
+                web.header('Content-Type', 'application/json')
+                return json.dumps(tiendas_json)
+        
         except Exception as e:
             print "GET Error {}".format(e.args)
             tiendas_json = '[]'
             web.header('Content-Type', 'application/json')
             return json.dumps(tiendas_json)
+
 
 # http://0.0.0.0:8080/api_tiendas?user_hash=12345&action=put&id_tienda=1&product=nuevo&description=nueva&stock=10&purchase_price=1&price_sale=3&product_image=0
     def put(self, nombre_tienda,nom_acceso_tienda,contrasena_tienda,fotografia_tienda,promedio_evaluaciones):
@@ -88,7 +97,7 @@ class Api_tiendas:
                 if action is None:
                     raise web.seeother('/404')
                 elif action == 'get':
-                    return self.get(id_tienda)
+                    return self.get(id_tienda, nombre_tienda)
                 elif action == 'put':
                     return self.put(nombre_tienda,nom_acceso_tienda,contrasena_tienda,fotografia_tienda,promedio_evaluaciones)
                 elif action == 'delete':
